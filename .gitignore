@@ -11,6 +11,6 @@ pip-delete-this-directory.txt
 *.log
 local_settings.py
 
+/bone/static/
 /bone/media/
 /bone/db.sqlite3
-/static
