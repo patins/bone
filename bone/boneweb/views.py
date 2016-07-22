@@ -35,9 +35,10 @@ def profile(request):
         return redirect('home')
     resident = Resident.objects.get(user=request.user)
     if request.method == 'POST':
-        form = ResidentForm(request.POST, instance=resident)
+        form = ResidentForm(request.POST, request.FILES, instance=resident)
         if form.is_valid():
             form.save()
+            form = ResidentForm(instance=resident)
         return render(request, 'boneweb/profile.html', { 'resident': resident, 'form': form })
     else:
         form = ResidentForm(instance=resident)
