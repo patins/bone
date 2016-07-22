@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load compress %}
 <!doctype html>
 <html>
 	<head>
@@ -13,7 +14,9 @@
 		<!-- Font Awesome -->
 		<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
 		<!-- static/style.css -->
+		{% compress css %}
 		<link rel=stylesheet type=text/css href="{% static 'css/style.css' %}"/>
+		{% endcompress %}
 		<!-- favicon -->
 		<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +29,9 @@
 		<!--Bootstrap-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<!-- static/application.js -->
+		{% compress js %}
 		<script type="text/javascript" src="{% static 'js/application.js' %}">
+		{% endcompress %}
   	</script>
 	</body>
 </html>
