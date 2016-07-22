@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Resident
+from boneweb.models import Resident
 
 class ResidentForm(ModelForm):
     class Meta:

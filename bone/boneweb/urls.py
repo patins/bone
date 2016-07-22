@@ -23,6 +23,4 @@ urlpatterns = [
     url(r'^residents/([0-9]{4})/$', views.residents_by_year, name='residents_by_year'),
     #url(r'^residents/([0-9]{4})/([A-Za-z0-9]+)/$', views.resident, name='resident'),
     #url(r'^residents/([0-9]{4})/([A-Za-z0-9]+)/image$', views.resident_image, name='resident_image'),
-    url(r'^profile/$', views.profile, name='profile'),
-    url(r'^login/$', views.login, name='login'),
 ]

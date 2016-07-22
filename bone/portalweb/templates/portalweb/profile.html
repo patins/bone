@@ -1,12 +1,20 @@
-{% extends 'boneweb/simple.html' %}
+{% extends "boneweb/simple.html" %}
 {% load bootstrap %}
+{% load thumbnail %}
 {% block content %}
+{% if resident.picture %}
+<div class="pull-right">
+  {% thumbnail resident.picture "x400" as im %}
+  <img src="{{ im.url }}" style="max-height: 200px;" />
+  {% endthumbnail %}
+</div>
+{% endif %}
 <h1>{{ resident.kerberos }}'s Profile</h1>
 <p>
   Year: {{ resident.year }}
 </p>
 <form role="form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
-    <legend>Update</legend>
+    <legend style="clear:none;">Update</legend>
     {% csrf_token %}
     {{ form|bootstrap }}
     <div class="form-group">

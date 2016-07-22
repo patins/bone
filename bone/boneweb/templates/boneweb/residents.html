@@ -1,4 +1,5 @@
 {% extends "boneweb/simple.html" %}
+{% load thumbnail %}
 {% block content %}
 <h1>Residents<!--{% if year %} - {{ year }}{% endif %}--></h1>
 <ul class="nav nav-tabs nav-justified resident-year-nav">
@@ -10,9 +11,9 @@
 {% for resident in residents %}
 <div class="row resident">
   <div class="col-md-4 resident-picture">
-    {% if resident.picture %}
-    <img src="{{ resident.picture.url }}" />
-    {% endif %}
+    {% thumbnail resident.picture "x400" as im %}
+    <img src="{{ im.url }}" />
+    {% endthumbnail %}
   </div>
   <div class="col-md-8">
     <h2>{{ resident.name }} - {{ resident.kerberos }}{% if not year %} (<a href="{% url 'residents_by_year' resident.year %}">{{ resident.year }}</a>){% endif %}</h2>

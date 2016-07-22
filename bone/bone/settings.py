@@ -15,19 +15,18 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'imel^7=8n0y33&mfyv57p=iboglr118xlbx*y6j_^hs1343a&%'
+SECRET_KEY = ''
 
-SCRIPTS_AUTH_KEY = b'DO_NOT_USE_IN_PRODUCTION'
-SCRIPTS_AUTH_URL = 'https://insinger.scripts.mit.edu:444/bone/dev.php'
+SCRIPTS_AUTH_KEY = b''
+SCRIPTS_AUTH_URL = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
+THUMBNAIL_DEBUG = False
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -40,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrapform',
+    'sorl.thumbnail',
 
     'boneweb',
+    'portalweb',
+
     'debug_toolbar',
 ]
 
@@ -108,6 +110,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'portalweb.auth.ScriptsAuthenticationBackend'
+]
+
+LOGIN_URL = '/login/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -125,7 +134,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 # Media files
