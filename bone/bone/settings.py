@@ -135,7 +135,4 @@ MEDIA_URL = '/media/'
 # Sendfile for Nginx to send images
 #SENDFILE_HEADER = 'X-Accel-Redirect'
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
+from .local_settings import *
