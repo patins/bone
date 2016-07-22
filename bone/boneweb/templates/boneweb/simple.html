@@ -1,0 +1,36 @@
+{% extends "boneweb/layout.html" %}
+{% block body %}
+<div class="container">
+  <div class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills pull-right">
+        {% for rule, name in menu %}
+        <li role="presentation"
+          {% if request.resolver_match.url_name == rule %}class="active"{% endif %}>
+          <a href="{% url rule %}">{{name}}</a>
+        </li>
+        {% endfor %}
+        {% if user.is_authenticated %}
+        <li role="presentation"
+          {% if request.resolver_match.url_name == 'profile' %}class="active"{% endif %}>
+          <a href="{% url 'profile' %}">Profile</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <h3 class="text-muted">Burton One</h3>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <footer class="footer">
+    <p class="pull-right">
+      {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}">Floor Portal</a>
+      {% endif %}
+    </p>
+    <p>&copy; 2016 Burton One</p>
+  </footer>
+</div>
+{% endblock %}

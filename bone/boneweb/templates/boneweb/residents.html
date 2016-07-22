@@ -1,0 +1,25 @@
+{% extends "boneweb/simple.html" %}
+{% block content %}
+<h1>Residents<!--{% if year %} - {{ year }}{% endif %}--></h1>
+<ul class="nav nav-tabs nav-justified resident-year-nav">
+  <li role="presentation" {% if not year %}class="active"{% endif %}><a href="{% url 'residents' %}">All</a></li>
+  {% for the_year in all_years %}
+  <li role="presentation" {% if the_year|stringformat:"i" == year %}class="active"{% endif %}><a href="{% url 'residents_by_year' the_year %}">{{ the_year }}</a></li>
+  {% endfor %}
+</ul>
+{% for resident in residents %}
+<div class="row resident">
+  <div class="col-md-4 resident-picture">
+    {% if resident.picture %}
+    <img src="{{ resident.picture.url }}" />
+    {% endif %}
+  </div>
+  <div class="col-md-8">
+    <h2>{{ resident.name }} - {{ resident.kerberos }}{% if not year %} (<a href="{% url 'residents_by_year' resident.year %}">{{ resident.year }}</a>){% endif %}</h2>
+    <p>
+      {{ resident.bio | default:"No bio available." | linebreaks }}
+    </p>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

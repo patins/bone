@@ -1,0 +1,15 @@
+venv/
+
+__pycache__/
+*.py[cod]
+
+pip-log.txt
+pip-delete-this-directory.txt
+
+.python-version
+
+*.log
+local_settings.py
+
+bone/media/
+bone/db.sqlite3
