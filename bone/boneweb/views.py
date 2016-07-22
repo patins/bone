@@ -45,9 +45,8 @@ def profile(request):
         return render(request, 'boneweb/profile.html', { 'resident': resident, 'form': form })
 
 def verify_token(token, email, signature):
-    message = "{0}:{1}".format(token, email).encode('utf-8')
+    message = "{}:{}".format(token, email).encode('utf-8')
     h = hmac.new(settings.SCRIPTS_AUTH_KEY, message, hashlib.sha256)
-    print(h.hexdigest(), signature)
     return hmac.compare_digest(h.hexdigest(), signature)
 
 def login(request):
