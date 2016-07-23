@@ -53,6 +53,10 @@ def login_view(request):
             login(request, user)
             return redirect('profile')
         return render(request, 'portalweb/authentication_failed.html')
+    elif request.GET.get('failed'):
+        if token:
+            del request.session['token']
+        return render(request, 'portalweb/authentication_failed.html')
     token = get_random_string(length=32)
     request.session['token'] = token
     return redirect('{}?token={}'.format(settings.SCRIPTS_AUTH_URL, token))
