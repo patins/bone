@@ -1,4 +1,4 @@
-bone.mit.edu
+bone.mit.edu [![Build Status](https://travis-ci.com/patins/bone.svg?token=qtHz376FXw1xGgVxnyHz&branch=master)](https://travis-ci.com/patins/bone)
 ==============
 B1's website
 
