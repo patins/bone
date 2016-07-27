@@ -10,7 +10,8 @@ def make_visible(modeladmin, request, queryset):
 make_visible.short_description = "Show selected residents"
 
 class ResidentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'kerberos', 'bio', 'visible')
+    list_display = ('name', 'kerberos', 'bio', 'visible', 'birthday')
+    search_fields = ('name', 'kerberos')
     actions = [make_hidden, make_visible]
 
 admin.site.register(Resident, ResidentAdmin)
