@@ -1,8 +1,8 @@
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'imel^7=8n0y33&mfyv57p=iboglr118xlbx*y6j_^hs1343a&%'
 
-SCRIPTS_AUTH_KEY = b'DO_NOT_USE_IN_PRODUCTION'
-SCRIPTS_AUTH_URL = 'https://insinger.scripts.mit.edu:444/bone/dev.php'
+SHIB_RESPONDER_URL = None
+SHIB_EMAIL_HEADER = 'HTTP_EPPN'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

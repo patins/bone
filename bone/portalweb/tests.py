@@ -4,6 +4,34 @@ from django.test import Client
 from boneweb.models import Resident
 from django.contrib.auth.models import User
 
+from urllib.parse import urlparse, parse_qs
+
+class AuthenticationTestCase(TestCase):
+    def setUp(self):
+        Resident.objects.create(name='Patrick', kerberos='insinger', year=2019)
+    def test_scripts_redirect(self):
+        with self.settings(SHIB_RESPONDER_URL='https://bone.mit.edu/Shibboleth.sso'):
+            r = Client().get('/login/')
+            self.assertEqual(r.status_code, 302)
+            self.assertEqual(r.url.split('?')[0], "https://bone.mit.edu/Shibboleth.sso/Login")
+            query = parse_qs(urlparse(r.url).query)
+            self.assertEqual(query['target'][0], "http://testserver/login/")
+    def test_invalid_email(self):
+        self.assertLoginFails('insinger@harvard.edu')
+    def test_no_resident(self):
+        self.assertLoginFails('aveni@mit.edu')
+    def test_valid(self):
+        c = Client()
+        r = Client().get('/login/', HTTP_EPPN='insinger@MIT.edu')
+        self.assertRedirects(r, '/profile/')
+        self.assertTrue(User.objects.filter(username='insinger').exists())
+    def tearDown(self):
+        Resident.objects.all().delete()
+        User.objects.all().delete()
+    def assertLoginFails(self, eppn):
+        r = Client().get('/login/', HTTP_EPPN=eppn)
+        self.assertIn(b'Failure', r.content)
+
 class ProfileTestCase(TestCase):
     def setUp(self):
         user = User.objects.create(username='insinger')

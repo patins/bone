@@ -2,6 +2,7 @@ from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from boneweb.models import Resident
 
 from django.conf import settings
@@ -40,12 +41,16 @@ def login_view(request):
     if request.user.is_authenticated():
         return redirect('profile')
     email = request.META.get('HTTP_EPPN')
+    if settings.DEBUG and settings.SHIB_RESPONDER_URL is None:
+        email = request.GET.get('eppn')
     if email:
         user = authenticate(email=email)
         if user:
             login(request, user)
             return redirect('profile')
         return render(request, 'portalweb/authentication_failed.html')
+    if settings.DEBUG and settings.SHIB_RESPONDER_URL is None:
+        return HttpResponse("No shib to redirect to. Use ?eppn=<email>")
     target_uri = request.build_absolute_uri(request.path)
     redirect_qs = urlencode({'target': target_uri})
     return redirect("{}/Login?{}".format(settings.SHIB_RESPONDER_URL, redirect_qs))
@@ -53,7 +58,8 @@ def login_view(request):
 def logout_view(request):
     if request.user.is_authenticated():
         logout(request)
-        home_uri = request.build_absolute_uri(reverse('home'))
-        redirect_qs = urlencode({'return': home_uri})
-        return redirect("{}/Logout?{}".format(settings.SHIB_RESPONDER_URL, redirect_qs))
+        if settings.SHIB_RESPONDER_URL:
+            home_uri = request.build_absolute_uri(reverse('home'))
+            redirect_qs = urlencode({'return': home_uri})
+            return redirect("{}/Logout?{}".format(settings.SHIB_RESPONDER_URL, redirect_qs))
     return redirect('home')

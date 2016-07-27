@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SHIB_RESPONDER_URL = ''
-SHIB_LOGIN_HEADER = 'HTTP_EPPN'
+SHIB_EMAIL_HEADER = 'HTTP_EPPN'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
