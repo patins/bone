@@ -39,7 +39,6 @@ class ShibbolethAuthenticationBackend(ModelBackend):
 def login_view(request):
     if request.user.is_authenticated():
         return redirect('profile')
-    print(request.META)
     email = request.META.get('HTTP_EPPN')
     if email:
         user = authenticate(email=email)
