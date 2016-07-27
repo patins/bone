@@ -19,10 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
 
-SCRIPTS_AUTH_KEY = b''
-SCRIPTS_AUTH_URL = ''
+SHIB_RESPONDER_URL = ''
+SHIB_EMAIL_HEADER = 'HTTP_EPPN'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -113,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'portalweb.auth.ScriptsAuthenticationBackend'
+    'portalweb.auth.ShibbolethAuthenticationBackend'
 ]
 
 LOGIN_URL = '/login/'
