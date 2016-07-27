@@ -6,6 +6,7 @@ from boneweb.models import Resident
 
 from django.conf import settings
 from django.contrib.auth import login, logout, authenticate
+from django.core.urlresolvers import reverse
 
 from urllib.parse import urlencode
 
@@ -48,9 +49,12 @@ def login_view(request):
         return render(request, 'portalweb/authentication_failed.html')
     target_uri = request.build_absolute_uri(request.path)
     redirect_qs = urlencode({'target': target_uri})
-    return redirect("{}?{}".format(settings.SHIB_LOGIN_URL, redirect_qs))
+    return redirect("{}/Login?{}".format(settings.SHIB_RESPONDER_URL, redirect_qs))
 
 def logout_view(request):
     if request.user.is_authenticated():
         logout(request)
+        home_uri = request.build_absolute_uri(reverse('home'))
+        redirect_qs = urlencode({'return': home_uri})
+        return redirect("{}/Logout?{}".format(settings.SHIB_RESPONDER_URL, redirect_qs))
     return redirect('home')
