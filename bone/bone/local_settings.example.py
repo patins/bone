@@ -4,6 +4,8 @@ SECRET_KEY = 'imel^7=8n0y33&mfyv57p=iboglr118xlbx*y6j_^hs1343a&%'
 SHIB_RESPONDER_URL = None
 SHIB_EMAIL_HEADER = 'HTTP_EPPN'
 
+GA_KEY = 'UA-81236707-1'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
