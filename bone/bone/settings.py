@@ -23,6 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHIB_RESPONDER_URL = ''
 SHIB_EMAIL_HEADER = 'HTTP_EPPN'
 
+GA_KEY = None
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 THUMBNAIL_DEBUG = False
@@ -73,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'boneweb.context_processors.menu',
+                'boneweb.context_processors.google_analytics'
             ],
         },
     },
