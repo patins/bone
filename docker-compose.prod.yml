@@ -2,8 +2,10 @@ version: '2'
 services:
   db:
     image: postgres
+    restart: always
   cache:
     image: redis
+    restart: always
   app:
     build: bone
     ports:
