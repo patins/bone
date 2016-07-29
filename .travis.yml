@@ -1,12 +1,12 @@
 sudo: required
 
+language: generic
+
 services:
   - docker
 
-before_script:
-  - docker-compose -f docker-compose.yml -f test.yml up -d
-
 script:
+  - docker-compose -f docker-compose.yml -f test.yml up -d
   - docker-compose exec app python3 manage.py test
 
 after_script:
