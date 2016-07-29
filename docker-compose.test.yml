@@ -1,0 +1,13 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  cache:
+    image: redis
+  app:
+    build: bone
+    depends_on:
+      - db
+      - cache
+    env:
+      - SECRET_KEY=yoQGaA,J@QWLtEYzw,Ecd4E3yAQeUyjw
