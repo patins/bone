@@ -1,7 +1,8 @@
 language: python
 python:
   - "3.5"
-
+cache: pip
 install: "pip install -r bone/requirements.txt"
-
 script: "cd bone; python manage.py test --settings bone.settings_test"
+notifications:
+  email: false
