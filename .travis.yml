@@ -1,11 +1,8 @@
-language: "python"
+language: python
 python:
   - "3.5"
 cache: pip
-install: "pip install -r requirements.txt"
-before_script:
-  - cp bone/bone/local_settings.example.py bone/bone/local_settings.py
-script:
-  - cd bone && python manage.py test
+install: "pip install -r bone/requirements.txt"
+script: "cd bone; python manage.py test --settings bone.settings_test"
 notifications:
   email: false

@@ -19,16 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-SHIB_RESPONDER_URL = ''
-SHIB_EMAIL_HEADER = 'HTTP_EPPN'
-
-GA_KEY = None
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-THUMBNAIL_DEBUG = False
-ALLOWED_HOSTS = []
+DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
+
+ALLOWED_HOSTS = list(filter(None, os.environ.get('ALLOWED_HOSTS', '').split(',')))
 
 # Application definition
 
@@ -83,17 +79,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bone.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432
     }
 }
 
+# Cache
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://cache:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# Session
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -120,6 +134,8 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = '/login/'
 
+SHIB_RESPONDER_URL = os.environ.get('SHIB_RESPONDER_URL')
+SHIB_EMAIL_HEADER = 'HTTP_EPPN'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -133,7 +149,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -151,7 +166,14 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# sorl-thumbnail
+THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
+THUMBNAIL_REDIS_HOST = 'cache'
+THUMBNAIL_REDIS_DB = 1
+
+# google analytics
+GA_KEY = os.environ.get('GA_KEY')
+
 # Sendfile for Nginx to send images
 #SENDFILE_HEADER = 'X-Accel-Redirect'
-
-from .local_settings import *

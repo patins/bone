@@ -49,8 +49,11 @@ def login_view(request):
             login(request, user)
             return redirect('profile')
         return render(request, 'portalweb/authentication_failed.html')
-    if settings.DEBUG and settings.SHIB_RESPONDER_URL is None:
-        return HttpResponse("No shib to redirect to. Use ?eppn=<email>")
+    if settings.SHIB_RESPONDER_URL is None:
+        if settings.DEBUG:
+            return HttpResponse("No shib to redirect to. Use ?eppn=<email>")
+        else:
+            return render(request, 'portalweb/authentication_failed.html')
     target_uri = request.build_absolute_uri(request.path)
     redirect_qs = urlencode({'target': target_uri})
     return redirect("{}/Login?{}".format(settings.SHIB_RESPONDER_URL, redirect_qs))
