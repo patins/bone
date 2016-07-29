@@ -9,5 +9,5 @@ services:
     depends_on:
       - db
       - cache
-    env:
-      - SECRET_KEY=yoQGaA,J@QWLtEYzw,Ecd4E3yAQeUyjw
+    environment:
+      SECRET_KEY: yoQGaA,J@QWLtEYzw,Ecd4E3yAQeUyjw
