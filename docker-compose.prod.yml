@@ -16,3 +16,4 @@ services:
       - cache
     env_file:
       - ./app.env
+    restart: always
