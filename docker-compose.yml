@@ -1,0 +1,26 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  cache:
+    image: redis
+  app:
+    build: bone
+    ports:
+      - "8000:8000"
+    volumes:
+      - /bone/static
+      - /bone/media
+    depends_on:
+      - db
+      - cache
+    env_file:
+      - ./app.env
+  web:
+    build: web-dev
+    ports:
+      - "80:80"
+    volumes_from:
+      - app:ro
+    depends_on:
+      - app
