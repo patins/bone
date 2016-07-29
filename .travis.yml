@@ -4,4 +4,4 @@ python:
 
 install: "pip install -r bone/requirements.txt"
 
-script: "cd bone; python manage.py test"
+script: "cd bone; python manage.py test --settings bone.settings_test"
