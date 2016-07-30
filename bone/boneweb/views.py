@@ -12,11 +12,11 @@ def about(request):
 def residents(request):
     visible_residents = Resident.objects.filter(visible=True)
     ordered_residents = visible_residents.order_by('year', 'name')
-    all_years = visible_residents.values_list('year', flat=True).distinct()
+    all_years = visible_residents.values_list('year', flat=True).distinct().order_by('year')
     return render(request, 'boneweb/residents.html', {'residents': ordered_residents, 'all_years': all_years})
 
 def residents_by_year(request, year):
-    all_years = Resident.objects.filter(visible=True).values_list('year', flat=True).distinct()
+    all_years = Resident.objects.filter(visible=True).values_list('year', flat=True).distinct().order_by('year')
     visible_residents = Resident.objects.filter(visible=True, year=year).order_by('name')
     if visible_residents.count() == 0:
         raise Http404()
