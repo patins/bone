@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 from uuid import uuid4
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
+
 def _picture_upload_to(resident, filename):
     return "residents/{}.{}".format(uuid4().hex, filename.split('.')[-1])
 
@@ -19,3 +25,8 @@ class Resident(models.Model):
 
     def __str__(self):
         return "{0} ({1})".format(self.name, self.kerberos)
+
+@receiver(post_save, sender=Resident, dispatch_uid="invalidate_resident_cache")
+def invalidate_resident_cache(sender, instance, **kwargs):
+    cache.delete(make_template_fragment_key('residents', []))
+    cache.delete(make_template_fragment_key('residents', [instance.year]))
