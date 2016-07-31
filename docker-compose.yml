@@ -15,4 +15,4 @@ services:
       - cache
     env_file:
       - ./app.env
-    command: sh -c "sleep 0.1; python3 manage.py runserver 0.0.0.0:8000"
+    command: bash -c "./wait-for-it db:5432 -- python3 manage.py runserver 0.0.0.0:8000"
