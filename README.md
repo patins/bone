@@ -3,7 +3,18 @@ bone.mit.edu [![Build Status](https://travis-ci.com/patins/bone.svg?token=qtHz37
 B1's website
 
 ## development
-this will be updated
+1. Install Docker and docker-compose. Use [Docker Toolbox](https://www.docker.com/products/docker-toolbox) to do this easily.
+2. Get your shell docker-ready:
+```
+docker-machine start
+eval $(docker-machine env)
+```
+3. Create app.env. Specify
+```
+SECRET_KEY=generate a random string
+DEBUG=True
+```
+4. Start developing!! The dev server will be available at your docker-machine's IP address, port 8000. To docker your docker-machine's IP run `docker-machine ip`.
 
 ## workflow
 1. branch from master (`git checkout master; git checkout -b my-feature`)
