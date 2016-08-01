@@ -26,6 +26,8 @@ DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
 
 ALLOWED_HOSTS = list(filter(None, os.environ.get('ALLOWED_HOSTS', '').split(',')))
 
+SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', '').lower() == 'true'
+
 # Application definition
 
 INSTALLED_APPS = [
