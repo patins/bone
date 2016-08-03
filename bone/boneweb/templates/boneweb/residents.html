@@ -2,13 +2,16 @@
 {% load thumbnail %}
 {% load cache %}
 {% block content %}
-{% cache 60 residents year %}
-<h1>Residents<!--{% if year %} - {{ year }}{% endif %}--></h1>
+{% cache 60 residents request.resolver_match.url_name year %}
+<h1>Residents</h1>
 <ul class="nav nav-tabs nav-justified resident-year-nav">
-  <li role="presentation" {% if not year %}class="active"{% endif %}><a href="{% url 'residents' %}">All</a></li>
+  <li role="presentation" {% if request.resolver_match.url_name == 'residents' %}class="active"{% endif %}><a href="{% url 'residents' %}">All</a></li>
   {% for the_year in all_years %}
   <li role="presentation" {% if the_year|stringformat:"i" == year %}class="active"{% endif %}><a href="{% url 'residents_by_year' the_year %}">{{ the_year }}</a></li>
   {% endfor %}
+  {% if alumni.count %}
+  <li role="presentation" {% if request.resolver_match.url_name == 'alumni' %}class="active"{% endif %}><a href="{% url 'alumni' %}">Alumni</a></li>
+  {% endif %}
 </ul>
 {% for resident in residents %}
 <div class="row resident">
