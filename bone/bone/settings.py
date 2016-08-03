@@ -28,6 +28,9 @@ ALLOWED_HOSTS = list(filter(None, os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', '').lower() == 'true'
 
+if DEBUG:
+    INTERNAL_IPS = list(filter(None, os.environ.get('INTERNAL_IPS', '').split(',')))
+
 # Application definition
 
 INSTALLED_APPS = [

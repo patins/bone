@@ -28,5 +28,6 @@ class Resident(models.Model):
 
 @receiver(post_save, sender=Resident, dispatch_uid="invalidate_resident_cache")
 def invalidate_resident_cache(sender, instance, **kwargs):
-    cache.delete(make_template_fragment_key('residents', []))
-    cache.delete(make_template_fragment_key('residents', [instance.year]))
+    cache.delete(make_template_fragment_key('residents', ['residents', '']))
+    cache.delete(make_template_fragment_key('residents', ['residents_by_year', instance.year]))
+    cache.delete(make_template_fragment_key('residents', ['alumni', '']))
