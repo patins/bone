@@ -5,7 +5,7 @@
 {% cache 60 residents request.resolver_match.url_name year %}
 <h1>Residents</h1>
 <ul class="nav nav-tabs nav-justified resident-year-nav">
-  <li role="presentation" {% if request.resolver_match.url_name == 'residents' %}class="active"{% endif %}><a href="{% url 'residents' %}">Current Residents</a></li>
+  <li role="presentation" {% if request.resolver_match.url_name == 'residents' %}class="active"{% endif %}><a href="{% url 'residents' %}">Current</a></li>
   {% for the_year in all_years %}
   <li role="presentation" {% if the_year|stringformat:"i" == year %}class="active"{% endif %}><a href="{% url 'residents_by_year' the_year %}">{{ the_year }}</a></li>
   {% endfor %}
