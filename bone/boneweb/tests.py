@@ -3,6 +3,7 @@ from django.test import Client
 from .models import Resident
 from unittest import mock
 from datetime import datetime
+from .views import _current_graduation_year
 
 class StaticPageTestCase(TestCase):
     def setUp(self):
@@ -28,6 +29,8 @@ class ResidentsPageTestCase(TestCase):
         with mock.patch('django.utils.timezone.now') as mock_now:
             mock_now.return_value = self.MOCK_NOW
             return self.c.get(url)
+    def test_current_graduation_year(self):
+        self.assertEqual(_current_graduation_year(), 2016)
     def test_main_page(self):
         r = self.get('/residents/')
         self.assertEqual(200, r.status_code)
