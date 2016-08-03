@@ -6,8 +6,8 @@
       <ul class="nav nav-pills pull-right">
         {% for rule, name in menu %}
         <li role="presentation"
-          {% if request.resolver_match.url_name == rule %}class="active"{% endif %}>
-          <a href="{% url rule %}">{{name}}</a>
+          {% if request.resolver_match.url_name in rule %}class="active"{% endif %}>
+          <a href="{% url rule.0 %}">{{name}}</a>
         </li>
         {% endfor %}
         {% if user.is_authenticated %}

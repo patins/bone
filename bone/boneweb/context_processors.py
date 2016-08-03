@@ -2,9 +2,9 @@ from django.conf import settings
 
 
 MENU_ITEMS = [
-    ('home', "Home"),
-    ('about', "About"),
-    ('residents', "Residents"),
+    (['home'], "Home"),
+    (['about'], "About"),
+    (['residents', 'residents_by_year', 'alumni'], "Residents"),
 ]
 
 def menu(request):
