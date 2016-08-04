@@ -51,5 +51,5 @@ class REXEvent(models.Model):
         verbose_name_plural = "REX Events"
 
 @receiver(post_save, sender=REXEvent, dispatch_uid="invalidate_rex_event_cache")
-def invalidate_resident_cache(sender, instance, **kwargs):
-    cache.delete(make_template_fragment_key('rex_events', []))
+def invalidate_rex_event_cache(sender, instance, **kwargs):
+    cache.delete(make_template_fragment_key('rex_events'))
