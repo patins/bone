@@ -49,3 +49,7 @@ class REXEvent(models.Model):
     class Meta:
         verbose_name = "REX Event"
         verbose_name_plural = "REX Events"
+
+@receiver(post_save, sender=REXEvent, dispatch_uid="invalidate_rex_event_cache")
+def invalidate_resident_cache(sender, instance, **kwargs):
+    cache.delete(make_template_fragment_key('rex_events', []))
