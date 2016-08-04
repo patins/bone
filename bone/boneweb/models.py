@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 from uuid import uuid4
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from django.core.cache import cache
@@ -30,6 +30,7 @@ class Resident(models.Model):
         return "{0} ({1})".format(self.name, self.kerberos)
 
 @receiver(post_save, sender=Resident, dispatch_uid="invalidate_resident_cache")
+@receiver(post_delete, sender=Resident, dispatch_uid="invalidate_resident_cache")
 def invalidate_resident_cache(sender, instance, **kwargs):
     cache.delete(make_template_fragment_key('residents', ['residents', '']))
     cache.delete(make_template_fragment_key('residents', ['residents_by_year', instance.year]))
@@ -51,5 +52,6 @@ class REXEvent(models.Model):
         verbose_name_plural = "REX Events"
 
 @receiver(post_save, sender=REXEvent, dispatch_uid="invalidate_rex_event_cache")
+@receiver(post_delete, sender=REXEvent, dispatch_uid="invalidate_rex_event_cache")
 def invalidate_rex_event_cache(sender, instance, **kwargs):
     cache.delete(make_template_fragment_key('rex_events'))
