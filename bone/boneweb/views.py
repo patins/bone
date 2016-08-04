@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resident
+from .models import Resident, REXEvent
 
 from django.http import Http404
 
@@ -9,7 +9,8 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 
 def home(request):
-    return render(request, 'boneweb/home.html')
+    rex_events = REXEvent.objects.filter(end__gt=timezone.now(), visible=True).order_by('start')
+    return render(request, 'boneweb/home.html', {'rex_events': rex_events})
 
 def about(request):
     return render(request, 'boneweb/about.html')
