@@ -1,9 +1,16 @@
 from django.test import TestCase
 from django.test import Client
-from .models import Resident
+from .models import Resident, REXEvent
 from unittest import mock
-from datetime import datetime
+from datetime import datetime, timedelta
+from django.utils import timezone
 from .views import _current_graduation_year
+
+def the_past():
+    return timezone.now() - timedelta(hours=1)
+
+def the_future():
+    return timezone.now() + timedelta(hours=1)
 
 class StaticPageTestCase(TestCase):
     def setUp(self):
@@ -12,13 +19,24 @@ class StaticPageTestCase(TestCase):
         r = self.c.get('/')
         self.assertIn(b"Welcome", r.content)
         self.assertEqual(200, r.status_code)
+        self.assertNotIn(b"REX Events", r.content)
+    def test_home_rex_events(self):
+        REXEvent.objects.create(name="Pat's Test Event", start=the_past(), end=the_future(), visible=True)
+        REXEvent.objects.create(name="NOTVISIBLE Event", start=the_past(), end=the_future())
+        REXEvent.objects.create(name="LATE Event", start=the_past(), end=the_past(), visible=True)
+        r = self.c.get('/')
+        self.assertEqual(200, r.status_code)
+        self.assertIn(b"REX Events", r.content)
+        self.assertNotIn(b"NOTVISIBLE", r.content)
+        self.assertNotIn(b"LATE", r.content)
+        REXEvent.objects.all().delete()
     def test_about(self):
         r = self.c.get('/about/')
         self.assertIn(b"About", r.content)
         self.assertEqual(200, r.status_code)
 
 class ResidentsPageTestCase(TestCase):
-    MOCK_NOW = datetime(2016, 7, 1, 10)
+    MOCK_NOW = datetime(2016, 7, 1)
     def setUp(self):
         self.c = Client()
         Resident.objects.create(name='Patrick', kerberos='insinger', year=2019, visible=True)
@@ -68,7 +86,7 @@ class ResidentsPageTestCase(TestCase):
         self.assertIn(b'Anubhav', r.content)
 
     def tearDown(self):
-        Resident.objects.all().delete
+        Resident.objects.all().delete()
 
 class ResidentVisibilityTestCase(TestCase):
     def setUp(self):

@@ -37,4 +37,16 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+{% if rex_events %}
+<div>
+  <h2>REX Events</h2>
+  {% for rex_event in rex_events %}
+  <h3>{{ rex_event.name }} - {{ rex_event.start }} - {{ rex_event.location }}</h3>
+  <p>
+    {{ rex_event.description }}
+  </p>
+  {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

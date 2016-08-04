@@ -9,6 +9,9 @@ from django.dispatch import receiver
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
 def _picture_upload_to(resident, filename):
     return "residents/{}.{}".format(uuid4().hex, filename.split('.')[-1])
 
@@ -31,3 +34,18 @@ def invalidate_resident_cache(sender, instance, **kwargs):
     cache.delete(make_template_fragment_key('residents', ['residents', '']))
     cache.delete(make_template_fragment_key('residents', ['residents_by_year', instance.year]))
     cache.delete(make_template_fragment_key('residents', ['alumni', '']))
+
+class REXEvent(models.Model):
+    name = models.TextField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    description = models.TextField()
+    location = models.TextField()
+    visible = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "REX Event"
+        verbose_name_plural = "REX Events"
