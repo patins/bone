@@ -12,11 +12,20 @@ def visible_actions(model):
 
     return [make_hidden, make_visible]
 
+def make_alumni(modeladmin, request, queryset):
+    queryset.update(alumni=True)
+make_alumni.short_description = "Graduate selected residents"
+
+def make_current(modeladmin, request, queryset):
+    queryset.update(alumni=False)
+make_current.short_description = "Fail selected residents"
+
 class ResidentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'kerberos', 'year', 'bio', 'visible')
-    list_filter = ('year', 'visible')
+    list_display = ('name', 'kerberos', 'year', 'bio', 'visible', 'alumni')
+    list_filter = ('year', 'visible', 'alumni')
     search_fields = ('name', 'kerberos')
     actions = visible_actions(Resident)
+    actions.extend([make_alumni, make_current])
 
 admin.site.register(Resident, ResidentAdmin)
 
