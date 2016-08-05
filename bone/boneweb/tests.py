@@ -10,7 +10,7 @@ def the_past():
 def the_future():
     return timezone.now() + timedelta(hours=1)
 
-class HomePageTestCase(TestCase):
+class StaticPageTestCase(TestCase):
     def setUp(self):
         self.c = Client()
     def test_home(self):
@@ -18,24 +18,32 @@ class HomePageTestCase(TestCase):
         self.assertIn(b"Welcome", r.content)
         self.assertEqual(200, r.status_code)
         self.assertNotIn(b"REX Events", r.content)
-    def test_home_rex_events(self):
+    def test_about(self):
+        r = self.c.get('/about/')
+        self.assertIn(b"About", r.content)
+        self.assertEqual(200, r.status_code)
+        self.assertNotIn(b"REX Events", r.content)
+
+class REXEventTestCase(TestCase):
+    def setUp(self):
+        self.c = Client()
         REXEvent.objects.create(name="Pat's Test Event", start=the_past(), end=the_future(), visible=True)
         REXEvent.objects.create(name="NOTVISIBLE Event", start=the_past(), end=the_future())
         REXEvent.objects.create(name="LATE Event", start=the_past(), end=the_past(), visible=True)
+    def test_home_rex_events(self):
         r = self.c.get('/')
         self.assertEqual(200, r.status_code)
         self.assertIn(b"REX Events", r.content)
         self.assertNotIn(b"NOTVISIBLE", r.content)
         self.assertNotIn(b"LATE", r.content)
-        REXEvent.objects.all().delete()
-
-class StaticPageTestCase(TestCase):
-    def setUp(self):
-        self.c = Client()
-    def test_about(self):
+    def test_about_rex_events(self):
         r = self.c.get('/about/')
-        self.assertIn(b"About", r.content)
         self.assertEqual(200, r.status_code)
+        self.assertIn(b"REX Events", r.content)
+        self.assertNotIn(b"NOTVISIBLE", r.content)
+        self.assertNotIn(b"LATE", r.content)
+    def tearDown(self):
+        REXEvent.objects.all().delete()
 
 class ResidentsPageTestCase(TestCase):
     def setUp(self):
