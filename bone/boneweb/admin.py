@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Resident, REXEvent
+from .models import Resident, REXEvent, Quote
 
 def visible_actions(model):
     def make_hidden(modeladmin, request, queryset):
@@ -27,3 +27,11 @@ class REXEventAdmin(admin.ModelAdmin):
     actions = visible_actions(REXEvent)
 
 admin.site.register(REXEvent, REXEventAdmin)
+
+class QuoteAdmin(admin.ModelAdmin):
+    list_display = ('text', 'author', 'submitter', 'public')
+    list_filter = ('author', 'public')
+    search_fields = ('text', 'author')
+    actions = visible_actions(Quote)
+
+admin.site.register(Quote, QuoteAdmin)

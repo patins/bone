@@ -55,3 +55,12 @@ class REXEvent(models.Model):
 @receiver(post_delete, sender=REXEvent, dispatch_uid="invalidate_rex_event_cache")
 def invalidate_rex_event_cache(sender, instance, **kwargs):
     cache.delete(make_template_fragment_key('rex_events'))
+
+class Quote(models.Model):
+    text = models.TextField()
+    author = models.ForeignKey(Resident, related_name='authored_quotes', on_delete=models.CASCADE)
+    submitter = models.ForeignKey(Resident, related_name='submitted_quotes', on_delete=models.CASCADE)
+    public = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "\"{0}\" - {1}".format(self.text, self.author.name)

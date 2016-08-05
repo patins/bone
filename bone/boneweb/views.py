@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resident, REXEvent
+from .models import Resident, REXEvent, Quote
 
 from django.http import Http404
 
@@ -47,6 +47,10 @@ def alumni(request):
     visible_alums = Resident.objects.filter(visible=True, year__lte=grad_year)
     ordered_alums = visible_alums.order_by('year', 'name')
     return render(request, 'boneweb/residents.html', {'residents': ordered_alums, 'alumni': ordered_alums, 'all_years': all_years})
+
+def quotes(request):
+    public_quotes = Quote.objects.filter(public=True)
+    return render(request, 'boneweb/quotes.html', {'quotes': public_quotes})
 
 """
 from django.conf import settings

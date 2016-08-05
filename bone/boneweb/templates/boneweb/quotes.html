@@ -1,0 +1,11 @@
+{% extends "boneweb/simple.html" %}
+{% block content %}
+<h1>Quotes</h1>
+<br>
+
+{% for q in quotes %}
+  <h4>{{q}}</h4>
+  <br>
+{% endfor %}
+
+{% endblock %}

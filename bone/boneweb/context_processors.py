@@ -5,6 +5,7 @@ MENU_ITEMS = [
     (['home'], "Home"),
     (['about'], "About"),
     (['residents', 'residents_by_year', 'alumni'], "Residents"),
+    (['quotes'], "Quotes")
 ]
 
 def menu(request):
