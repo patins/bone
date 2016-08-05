@@ -13,7 +13,8 @@ def home(request):
     return render(request, 'boneweb/home.html', {'rex_events': rex_events})
 
 def about(request):
-    return render(request, 'boneweb/about.html')
+    rex_events = REXEvent.objects.filter(end__gt=timezone.now(), visible=True).order_by('start')
+    return render(request, 'boneweb/about.html', {'rex_events': rex_events})
 
 def residents(request):
     visible_residents = Resident.objects.filter(visible=True, alumni=False)
