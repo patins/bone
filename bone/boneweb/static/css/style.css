@@ -102,3 +102,7 @@ body {
 .admin-link {
   padding-right: 10px;
 }
+
+p.rex-event-description {
+  font-size: 14pt;
+}

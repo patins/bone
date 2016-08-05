@@ -1,0 +1,15 @@
+{% load cache %}
+{% cache 60 rex_events %}
+{% if rex_events %}
+<div>
+  <h2>REX Events</h2>
+  {% for rex_event in rex_events %}
+  <h3>{{ rex_event.name }}</h3>
+  <h4><i class="fa fa-clock-o" aria-hidden="true"></i> {{ rex_event.start }} <i class="fa fa-map-pin" aria-hidden="true"></i> {{ rex_event.location }}</h4>
+  <p class="rex-event-description">
+    {{ rex_event.description }}
+  </p>
+  {% endfor %}
+</div>
+{% endif %}
+{% endcache %}
