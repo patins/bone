@@ -26,6 +26,9 @@ DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
 
 ALLOWED_HOSTS = list(filter(None, os.environ.get('ALLOWED_HOSTS', '').split(',')))
 
+CSRF_COOKIE_NAME = '__bone_csrftoken'
+SESSION_COOKIE_NAME = '__bone_sessionid'
+
 SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', '').lower() == 'true'
 
 if DEBUG:
