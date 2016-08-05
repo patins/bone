@@ -25,6 +25,7 @@ class Resident(models.Model):
     visible = models.BooleanField(default=False)
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
     birthday = models.DateField(null=True, blank=True)
+    alumni = models.BooleanField(default=False)
 
     def __str__(self):
         return "{0} ({1})".format(self.name, self.kerberos)
