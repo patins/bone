@@ -79,7 +79,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'boneweb.context_processors.menu',
-                'boneweb.context_processors.google_analytics'
+                'boneweb.context_processors.google_analytics',
+                'boneweb.context_processors.google_maps'
             ],
         },
     },
@@ -182,6 +183,9 @@ THUMBNAIL_REDIS_DB = 1
 
 # google analytics
 GA_KEY = os.environ.get('GA_KEY')
+
+# google maps
+GMAPS_KEY = os.environ.get('GMAPS_KEY', 'AIzaSyCB1dQSe_MIaULJZgIRK8rX3ufW9QlsrSc')
 
 # Sendfile for Nginx to send images
 #SENDFILE_HEADER = 'X-Accel-Redirect'
