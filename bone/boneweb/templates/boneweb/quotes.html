@@ -3,9 +3,27 @@
 <h1>Quotes</h1>
 <br>
 
+<div class="row">
 {% for q in quotes %}
-  <h4>{{q}}</h4>
-  <br>
+  <div class="col-md-4">
+
+  {% if q.public %}
+    <div class="thumbnail quote">
+      <div class="caption">
+        <h3>"{{q.text}}"</h3>
+        <h4 class="text-right">- {{q.author.name}}</h4>
+      </div>
+    </div>
+  {% else %}
+    <div class="thumbnail quote-private">
+      <div class="caption">
+        <h3>"{{q.text}}"</h3>
+        <h4 class="text-right">- {{q.author.name}}</h4>
+      </div>
+    </div>
+  {% endif %}
+  </div>
 {% endfor %}
+</div>
 
 {% endblock %}

@@ -102,3 +102,10 @@ body {
 .admin-link {
   padding-right: 10px;
 }
+
+
+.quote {background-color: rgba(255, 255, 255, 1); border-color: rgba(0, 102, 255, 0.8);}
+.quote * {color: rgba(0, 102, 255, 1);}
+
+.quote-private {background-color: rgba(0, 102, 255, .8); border-color: rgba(0, 102, 255, 1);}
+.quote-private * {color: rgba(255, 255, 255, 1);}
