@@ -1,6 +1,9 @@
 {% extends "boneweb/simple.html" %}
 {% block content %}
 <h1>About Burton One</h1>
+<h2>Who</h2>
 <p>We're one of nine floors of Burton-Conner at MIT. We <i class="fa fa-heart" aria-hidden="true"></i> otters!</p>
+<h2>Where</h2>
+<iframe width="600" height="450" frameborder="0" style="border:0; width: 100%;" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJt1X_a_9544kRty01vzfcQUQ&key={{ GMAPS_KEY }}" allowfullscreen></iframe>
 {% include "boneweb/rex_events.html" %}
 {% endblock %}
