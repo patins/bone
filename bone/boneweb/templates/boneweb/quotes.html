@@ -1,6 +1,7 @@
 {% extends "boneweb/simple.html" %}
 {% block content %}
 <h1>Quotes</h1>
+<div style="text-align:right"><a class="btn btn-primary" href="{% url 'quotes_new' %}">Add a Quote</a></div>
 <br>
 
 <div class="row">
@@ -25,5 +26,6 @@
   </div>
 {% endfor %}
 </div>
+
 
 {% endblock %}
