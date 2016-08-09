@@ -21,7 +21,8 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^residents/$', views.residents, name='residents'),
     url(r'^residents/([0-9]{4})/$', views.residents_by_year, name='residents_by_year'),
-    url(r'^residents/alumni/$', views.alumni, name='alumni')
+    url(r'^residents/alumni/$', views.alumni, name='alumni'),
+    url(r'^quotes/$', views.quotes, name='quotes')
     #url(r'^residents/([0-9]{4})/([A-Za-z0-9]+)/$', views.resident, name='resident'),
     #url(r'^residents/([0-9]{4})/([A-Za-z0-9]+)/image$', views.resident_image, name='resident_image'),
 ]
