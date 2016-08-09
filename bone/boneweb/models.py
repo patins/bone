@@ -62,5 +62,9 @@ class Quote(models.Model):
     submitter = models.ForeignKey(Resident, related_name='submitted_quotes', on_delete=models.CASCADE)
     public = models.BooleanField(default=False)
 
+    def clean(self):
+        if self.text and self.text[0] == "\"" and self.text[-1] == "\"":
+            raise ValidationError('I said no quotation marks boiiiii')
+
     def __str__(self):
         return "\"{0}\" - {1}".format(self.text, self.author.name)
