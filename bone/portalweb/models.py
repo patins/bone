@@ -1,3 +1,13 @@
 from django.db import models
+from boneweb.models import Resident
 
-# Create your models here.
+class Tinder(models.Model):
+    resident = models.OneToOneField(Resident)
+    name = models.CharField(max_length=200)
+    age = models.CharField(max_length=20, blank=True)
+    location = models.CharField(max_length=200, blank=True)
+    bio = models.TextField(blank=True)
+    picture = models.ImageField(blank=True)
+
+    def __str__(self):
+        return "Tinder <{}>".format(self.resident)
