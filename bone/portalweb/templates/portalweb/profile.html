@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% block content %}
 {% if resident.picture %}
-<div class="pull-right">
+<div class="pull-right" style="margin-left: 20px; margin-bottom: 10px;">
   {% thumbnail resident.picture "x400" as im %}
   <img src="{{ im.url }}" style="max-height: 200px;" />
   {% endthumbnail %}
