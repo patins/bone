@@ -1,0 +1,53 @@
+{% extends "boneweb/simple.html" %}
+{% load bootstrap %}
+{% load thumbnail %}
+{% load static %}
+{% block content %}
+<h1>Your Tinder</h1>
+<div class="row">
+  <div class="col-md-6">
+    <form role="form" method="post" enctype="multipart/form-data" action="{% url 'tinder' %}">
+        <legend style="clear:none;">Update</legend>
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <legend style="clear:none;">Preview</legend>
+    <div class="phone-wrapper">
+      <div class="phone">
+        <img src="{% static 'img/iphone-6-front-black.png' %}" class="phone-image" />
+        <div class="tinder-container">
+          <div class="tinder">
+            <div class="tinder-image">
+              {% if resident.tinder.picture %}
+                {% thumbnail resident.tinder.picture "x400" as im %}
+                <div class="tinder-image-bg" style="background-image: url({{ im.url }});"></div>
+                {% endthumbnail %}
+              {% else %}
+              <div class="tinder-image-bg">
+                <p>Upload A Picture</p>
+              </div>
+              {% endif %}
+              <div class="tinder-down-btn">&#10140;</div>
+            </div>
+            <div class="tinder-content">
+              <p class="tinder-name-age"><span class="tinder-name">{{ resident.tinder.name }}</span>, {{ resident.tinder.age|default:"Age" }}</p>
+              <p class="tinder-distance">{{ resident.tinder.location|default:"Location" }}</p>
+              <p class="tinder-bio">{{ resident.tinder.bio|default:"Bio" }}</p>
+            </div>
+          </div>
+          <div class="tinder-controls">
+            <div class="tinder-like tinder-control">&hearts;</div>
+            <div class="tinder-skip tinder-control">X</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p></p>
+{% endblock %}

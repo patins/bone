@@ -1,0 +1,127 @@
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url('../font/rounded_book.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url('../font/rounded_bold.ttf') format('truetype');
+  font-weight: bold;
+}
+.tinder-container {
+  font-family: "Gotham Rounded";
+}
+.tinder {
+  height: 100%;
+  overflow-y:hidden;
+}
+.tinder .tinder-image {
+  height: 50%;
+}
+.tinder .tinder-image .tinder-image-bg {
+  height: 100%;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tinder .tinder-image .tinder-image-bg p {
+  font-size: 20pt;
+}
+.tinder .tinder-image .tinder-down-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  transform: rotate(90deg);
+  font-size: 20pt;
+  text-align: center;
+}
+.tinder .tinder-content {
+  border-top: 1px solid rgb(235, 235, 235);
+  padding-top: 10px;
+  color: rgb(124, 124, 124);
+}
+.tinder .tinder-content p {
+  padding: 0 20px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.tinder .tinder-content .tinder-name-age {
+  font-size: 20pt;
+  margin-bottom: 0px;
+  color: rgb(66,66,66);
+}
+.tinder .tinder-content .tinder-name-age .tinder-name {
+  font-weight: bold;
+}
+.tinder .tinder-content .tinder-bio {
+  border-top: 1px solid rgb(235, 235, 235);
+  padding-top: 10px;
+}
+.tinder-controls {
+  height: 90px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-top: -90px;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255, 255, 255, 1));
+}
+.tinder-controls .tinder-control {
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 30pt;
+  border-radius: 70px;
+}
+.tinder-controls .tinder-skip {
+  margin-left: 20px;
+  line-height: 75px;
+  background-color: rgb(255, 107, 107);
+}
+.tinder-controls .tinder-like {
+  background-color: rgb(76, 204, 145);
+  float: right;
+  line-height: 80px;
+  margin-right: 20px;
+}
+
+.phone-wrapper {
+  width: 428px;
+  height: 889px;
+  overflow: hidden;
+  transform-origin: 0 0 0;
+  margin: 0 auto;
+}
+.phone {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 428px;
+  height: 889px;
+  background: none;
+}
+.phone-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.tinder-container {
+  position: absolute;
+  top: 109px;
+  left: 27px;
+  width: 375px;
+  height: 669px;
+  border: 0;
+}

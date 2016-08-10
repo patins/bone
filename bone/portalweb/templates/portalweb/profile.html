@@ -13,6 +13,17 @@
 <p>
   Year: {{ resident.year }}
 </p>
+{% if resident.tinder %}
+<div class="alert alert-info" style="display: inline-block;">
+  <h3 style="margin-top: 0;">We see you started your Tinder profile!</h3>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">Check Your Matches</a>
+</div>
+{% else %}
+<div class="alert alert-danger" style="display: inline-block;">
+  <h3 style="margin-top: 0;">Tinder Profiles are up!</h3>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">Start Swipin'</a>
+</div>
+{% endif %}
 <form role="form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
     <legend style="clear:none;">Update</legend>
     {% csrf_token %}
