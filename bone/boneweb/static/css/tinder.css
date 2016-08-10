@@ -9,6 +9,7 @@
 }
 .tinder-container {
   font-family: "Gotham Rounded";
+  font-size: 20pt;
 }
 .tinder {
   height: 100%;
@@ -27,7 +28,7 @@
   justify-content: center;
 }
 .tinder .tinder-image .tinder-image-bg p {
-  font-size: 20pt;
+  font-size: 1em;
 }
 .tinder .tinder-image .tinder-down-btn {
   position: absolute;
@@ -39,7 +40,7 @@
   height: 50px;
   line-height: 55px;
   border-radius: 25px;
-  font-size: 20pt;
+  font-size: 1em;
   text-align: center;
   padding-left: 2px;
 }
@@ -53,9 +54,10 @@
   margin: 0;
   margin-bottom: 10px;
   word-wrap: break-word;
+  font-size: 0.6em;
 }
 .tinder .tinder-content .tinder-name-age {
-  font-size: 20pt;
+  font-size: 1em;
   margin-bottom: 0px;
   color: rgb(66,66,66);
 }
@@ -67,44 +69,40 @@
   padding-top: 10px;
 }
 .tinder-controls {
-  height: 90px;
+  height: 3.46em;
   position: absolute;
   bottom: 0;
   left: 0;
-  margin-top: -90px;
+  margin-top: -3.46em;
   width: 100%;
   background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255, 255, 255, 1));
 }
 .tinder-controls .tinder-control {
-  width: 70px;
-  height: 70px;
+  width: 1.6666em;
+  height: 1.6666em;
   text-align: center;
   color: white;
   font-weight: bold;
-  font-size: 32pt;
+  font-size: 1.6em;
   border-radius: 70px;
 }
 .tinder-controls .tinder-skip {
-  margin-left: 20px;
-  line-height: 75px;
+  margin-left: 0.48em;
+  line-height: 1.79em;
   background-color: rgb(255, 107, 107);
 }
 .tinder-controls .tinder-like {
   background-color: rgb(76, 204, 145);
   float: right;
-  line-height: 80px;
-  margin-right: 20px;
+  line-height: 1.9em;
+  margin-right: 0.48em;
 }
 .phone-wrapper {
   width: 428px;
   height: 889px;
-  transform-origin: center;
-  transform: scale(0.7);
-  margin-left: -55px;
-  margin-right: -55px;
-  margin-top: -100px;
-  margin-bottom: -80px;
+  margin: 0 auto;
 }
+
 .phone {
   position: relative;
   top: 0px;
@@ -127,4 +125,40 @@
   width: 375px;
   height: 669px;
   border: 0;
+}
+
+@media only screen and (max-width : 460px) {
+  .phone-wrapper {
+    width: 321px;
+    height: 666.75px;
+  }
+  .phone {
+    width: 321px;
+    height: 666.75px;
+  }
+  .tinder-container {
+    width: 281.25px;
+    height: 501.75px;
+    top: 81.75px;
+    left: 20.25px;
+    font-size: 15pt;
+  }
+}
+
+@media only screen and (max-width : 320px) {
+  .phone-wrapper {
+    width: 214px;
+    height: 444.5px;
+  }
+  .phone {
+    width: 214px;
+    height: 444.5px;
+  }
+  .tinder-container {
+    width:187.5px;
+    height: 334.5px;
+    top: 54.5px;
+    left: 13.5px;
+    font-size: 10pt;
+  }
 }
