@@ -5,7 +5,7 @@
 {% if resident.picture %}
 <div class="pull-right" style="margin-left: 20px; margin-bottom: 10px;">
   {% thumbnail resident.picture "x400" as im %}
-  <img src="{{ im.url }}" style="height: 200px;" />
+  <img src="{{ im.url }}" style="max-height: 200px;" />
   {% endthumbnail %}
 </div>
 {% endif %}
