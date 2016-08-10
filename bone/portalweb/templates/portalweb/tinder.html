@@ -32,22 +32,21 @@
                 <p>Upload A Picture</p>
               </div>
               {% endif %}
-              <div class="tinder-down-btn">&#10140;</div>
+              <div class="tinder-down-btn"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
             </div>
             <div class="tinder-content">
               <p class="tinder-name-age"><span class="tinder-name">{{ resident.tinder.name }}</span>, {{ resident.tinder.age|default:"Age" }}</p>
               <p class="tinder-distance">{{ resident.tinder.location|default:"Location" }}</p>
-              <p class="tinder-bio">{{ resident.tinder.bio|default:"Bio" }}</p>
+              <p class="tinder-bio">{{ resident.tinder.bio|default:"Bio"|linebreaksbr }}</p>
             </div>
           </div>
           <div class="tinder-controls">
-            <div class="tinder-like tinder-control">&hearts;</div>
-            <div class="tinder-skip tinder-control">X</div>
+            <div class="tinder-like tinder-control"><i class="fa fa-heart" aria-hidden="true"></i></div>
+            <div class="tinder-skip tinder-control"><i class="fa fa-times" aria-hidden="true"></i></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<p></p>
 {% endblock %}
