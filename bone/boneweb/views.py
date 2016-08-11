@@ -40,10 +40,9 @@ def alumni(request):
     return render(request, 'boneweb/residents.html', {'residents': ordered_alums, 'alumni': ordered_alums, 'all_years': all_years})
 
 def quotes(request):
-    if request.user.is_authenticated():
-        viewable_quotes = Quote.objects.filter()
-    else:
-        viewable_quotes = Quote.objects.filter(public=True)
+    viewable_quotes = Quote.objects.filter(visible=True).order_by('-submitted_at') # last submitted at top
+    if not request.user.is_authenticated():
+        viewable_quotes = viewable_quotes.filter(public=True)
     return render(request, 'boneweb/quotes.html', {'quotes': viewable_quotes})
 
 """

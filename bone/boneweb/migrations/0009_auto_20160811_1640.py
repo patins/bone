@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-from datetime import datetime
+from django.utils import timezone
 
 class Migration(migrations.Migration):
 
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='quote',
             name='submitted_at',
-            field=models.DateTimeField(auto_now_add=True, default=datetime.now),
+            field=models.DateTimeField(auto_now_add=True, default=timezone.now),
             preserve_default=False,
         ),
         migrations.AddField(

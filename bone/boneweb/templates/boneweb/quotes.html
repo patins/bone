@@ -1,22 +1,26 @@
 {% extends "boneweb/simple.html" %}
 {% block content %}
-<h1>Quotes</h1>
-<div style="text-align:right"><a class="btn btn-primary" href="{% url 'quotes_new' %}">Add a Quote</a></div>
-<br>
-
+<div class="pull-right">
+  {% if user.is_authenticated %}
+  <a class="btn btn-primary" href="{% url 'quotes_new' %}">Add a Quote</a>
+  {% else %}
+  <a class="btn btn-primary" href="{% url 'login' %}">Login to Add a Quote</a>
+  {% endif %}
+</div>
+<h1 style="margin-bottom: 20px;">Quotes</h1>
+{% if quotes %}
 <div class="row">
 {% for q in quotes %}
   <div class="col-md-4">
-
   {% if q.public %}
-    <div class="thumbnail quote">
+    <div class="thumbnail quote quote-public">
       <div class="caption">
         <h3>"{{q.text}}"</h3>
         <h4 class="text-right">- {{q.author.name}}</h4>
       </div>
     </div>
   {% else %}
-    <div class="thumbnail quote-private">
+    <div class="thumbnail quote quote-private">
       <div class="caption">
         <h3>"{{q.text}}"</h3>
         <h4 class="text-right">- {{q.author.name}}</h4>
@@ -25,7 +29,11 @@
   {% endif %}
   </div>
 {% endfor %}
+
 </div>
-
-
+{% else %}
+<h3 style="text-align: center;">
+  Sorry, there aren't any quotes yet.
+</h3>
+{% endif %}
 {% endblock %}
