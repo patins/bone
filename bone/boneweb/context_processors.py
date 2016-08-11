@@ -17,3 +17,8 @@ def google_analytics(request):
     return {
         'GA_KEY': settings.GA_KEY
     }
+
+def google_maps(request):
+    return {
+        'GMAPS_KEY': settings.GMAPS_KEY
+    }

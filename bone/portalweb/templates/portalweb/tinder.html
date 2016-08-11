@@ -1,0 +1,23 @@
+{% extends "boneweb/simple.html" %}
+{% load bootstrap %}
+{% load thumbnail %}
+{% load static %}
+{% block content %}
+<h1>Your Tinder</h1>
+<div class="row">
+  <div class="col-md-6">
+    <form role="form" method="post" enctype="multipart/form-data" action="{% url 'tinder' %}">
+        <legend style="clear:none;">Update</legend>
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <legend style="clear:none;">Preview</legend>
+    {% include "portalweb/tinder_phone.html" with tinder=resident.tinder %}
+  </div>
+</div>
+{% endblock %}

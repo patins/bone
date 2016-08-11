@@ -18,8 +18,9 @@ from . import views, auth
 
 urlpatterns = [
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^tinder/$', views.tinder, name='tinder'),
+    url(r'^tinders/$', views.tinders, name='tinders'),
     url(r'^login/$', auth.login_view, name='login'),
     url(r'^logout/$', auth.logout_view, name='logout'),
     url(r'^quotes/new/$', views.quotes_new, name='quotes_new')
-
 ]

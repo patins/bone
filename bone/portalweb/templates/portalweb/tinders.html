@@ -1,0 +1,31 @@
+{% extends "boneweb/simple.html" %}
+{% block content %}
+<h1>
+  B1 Current Resident Tinders
+  <p>
+    *This page lists all current residents as well as any alumni that have created a Tinder.
+  </p>
+</h1>
+{% for resident in residents %}
+<div class="row">
+  <div class="col-md-6">
+    <h2>{{ resident.name }} - <a href="mailto:{{ resident.kerberos }}@mit.edu">{{ resident.kerberos }}</a></h2>
+    <p>
+      <strong>Account Status: </strong>
+      {% if resident.user %}
+      Created (last login {{ resident.user.last_login }})
+      {% else %}
+      Not Created
+      {% endif %}
+    </p>
+  </div>
+  <div class="col-md-6">
+    {% if resident.tinder %}
+    {% include "portalweb/tinder_phone.html" with tinder=resident.tinder%}
+    {% else %}
+    <h2 style="text-align: center;">Tinder Not Created</h2>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

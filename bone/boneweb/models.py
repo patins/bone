@@ -25,6 +25,7 @@ class Resident(models.Model):
     visible = models.BooleanField(default=False)
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
     birthday = models.DateField(null=True, blank=True)
+    alumni = models.BooleanField(default=False)
 
     def __str__(self):
         return "{0} ({1})".format(self.name, self.kerberos)
@@ -61,6 +62,8 @@ class Quote(models.Model):
     author = models.ForeignKey(Resident, related_name='authored_quotes', on_delete=models.CASCADE)
     submitter = models.ForeignKey(Resident, related_name='submitted_quotes', on_delete=models.CASCADE)
     public = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
 
     def clean(self):
         if self.text and self.text[0] == "\"" and self.text[-1] == "\"":

@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% block content %}
 {% if resident.picture %}
-<div class="pull-right">
+<div class="pull-right" style="margin-left: 20px; margin-bottom: 10px;">
   {% thumbnail resident.picture "x400" as im %}
   <img src="{{ im.url }}" style="max-height: 200px;" />
   {% endthumbnail %}
@@ -13,6 +13,17 @@
 <p>
   Year: {{ resident.year }}
 </p>
+{% if resident.tinder %}
+<div class="alert alert-info" style="display: inline-block;">
+  <h3 style="margin-top: 0;">We see you started your Tinder profile!</h3>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">Update Yours</a>
+</div>
+{% else %}
+<div class="alert alert-danger" style="display: inline-block;">
+  <h3 style="margin-top: 0;">Tinder Profiles are up!</h3>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">Create Yours</a>
+</div>
+{% endif %}
 <form role="form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
     <legend style="clear:none;">Update</legend>
     {% csrf_token %}
