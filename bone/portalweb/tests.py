@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 
-from boneweb.models import Resident
+from boneweb.models import Resident, Quote
 from django.contrib.auth.models import User
 
 from urllib.parse import urlparse, parse_qs
@@ -58,3 +58,36 @@ class ProfileTestCase(TestCase):
     def tearDown(self):
         Resident.objects.all().delete()
         User.objects.all().delete()
+
+class QuotesPrivateTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create(username='insinger')
+        pat = Resident.objects.create(
+            name='Patrick',
+            kerberos='insinger',
+            year=2019,
+            user=user
+        )
+        abhi = Resident.objects.create(name='Abhi', kerberos='aveni', year=2019, visible=True)
+        Quote.objects.create(text="Funnels everyday", author=pat, submitter=abhi, public=True)
+        Quote.objects.create(text="Never forget the 3-week rule", author=abhi, submitter=abhi, public=False)
+        self.c = Client()
+        self.c.force_login(user)
+    def test_new_quote_page(self):
+        r =  self.c.get('/quotes/new/')
+        self.assertEqual(200, r.status_code)
+    def test_submit_new_quote(self):
+        r = self.c.post('/quotes/new/', {'text': "Ciroc dons", 'author' : Resident.objects.get(name="Abhi").id, 'public' : True})
+        self.assertEqual(302, r.status_code)
+        self.assertEqual('Patrick', Quote.objects.get(text="Ciroc dons").submitter.name)
+        r = self.c.get('/quotes/')
+        self.assertIn(b"Ciroc dons", r.content)
+    def test_quotes_private_viewability(self):
+        r = self.c.get('/quotes/')
+        self.assertEqual(200, r.status_code)
+        self.assertIn(b"Funnels everyday", r.content)
+        self.assertIn(b"Never forget the 3-week rule", r.content)
+    def tearDown(self):
+        Resident.objects.all().delete()
+        User.objects.all().delete()
+        Quote.objects.all().delete()
