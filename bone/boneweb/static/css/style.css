@@ -2,6 +2,11 @@
   font-family: 'Champagne';
   src: url('../font/normal.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Champagne';
+  font-weight: bold;
+  src: url('../font/bold.ttf') format('truetype');
+}
 /* stolen from bootstrap example */
 body {
   font-family: 'Champagne';

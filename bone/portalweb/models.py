@@ -11,3 +11,8 @@ class Tinder(models.Model):
 
     def __str__(self):
         return "Tinder <{}>".format(self.resident)
+
+    class Meta:
+        permissions = (
+            ("view_all", "Can view all Tinders and bulk output"),
+        )
