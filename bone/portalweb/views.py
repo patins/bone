@@ -60,9 +60,11 @@ def tinders_metrics():
 @permission_required('tinders.view_all', raise_exception=True)
 def tinders(request):
     only_not_completed = request.GET.get('not_completed') != None
-    residents = Resident.objects.filter(Q(alumni=False) | Q(tinder__isnull=False)).order_by('alumni', 'year', 'name')
+    residents = Resident.objects.order_by('alumni', 'year', 'name')
     if only_not_completed:
-        residents = residents.filter(TINDER_NOT_COMPLETED_SPECS)
+        residents = residents.filter(alumni=False).filter(TINDER_NOT_COMPLETED_SPECS | Q(tinder__isnull=True))
+    else:
+        residents = residents.filter(Q(alumni=False) | Q(tinder__isnull=False))
     residents = residents.prefetch_related('tinder', 'user')
     return render(request, 'portalweb/tinders.html', {
         'residents': residents,

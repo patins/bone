@@ -26,7 +26,7 @@
 {% endif %}
 <ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
   <li role="presentation"{% if not only_not_completed %} class="active"{% endif %}><a href=".">All</a></li>
-  <li role="presentation"{% if only_not_completed %} class="active"{% endif %}><a href="?not_completed">Not Completed</a></li>
+  <li role="presentation"{% if only_not_completed %} class="active"{% endif %}><a href="?not_completed">Current Residents Not Completed</a></li>
 </ul>
 {% for resident in residents %}
 <div class="row">
