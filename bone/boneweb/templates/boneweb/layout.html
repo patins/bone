@@ -4,17 +4,13 @@
 <html>
 	<head>
 		{% if title %}
-			<title>{{ title }}</title>
+		<title>{{ title }}</title>
 		{% else %}
-			<title>Burton One</title>
+		<title>Burton One</title>
 		{% endif %}
-
-		<!-- Bootstrap -->
-		<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-		<!-- Font Awesome -->
-		<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
-		<!-- static/style.css -->
 		{% compress css %}
+		<link rel=stylesheet type=text/css href="{% static 'css/bootstrap.css' %}"/>
+		<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
 		<link rel=stylesheet type=text/css href="{% static 'css/style.css' %}"/>
 		<link rel=stylesheet type=text/css href="{% static 'css/tinder.css' %}"/>
 		{% endcompress %}
@@ -25,12 +21,9 @@
 	<body>
 		{% block body %}
 		{% endblock %}
-		<!--JQuery-->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<!--Bootstrap-->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<!-- static/application.js -->
 		{% compress js %}
+		<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/application.js' %}"></script>
 		{% if GA_KEY %}
 		<script>

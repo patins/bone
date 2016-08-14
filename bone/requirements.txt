@@ -7,6 +7,7 @@ django-redis==4.4.4
 fakeredis==0.7.0
 Pillow==3.3.0
 psycopg2==2.6.2
+pytz==2016.6.1
 rcssmin==1.0.6
 redis==2.10.5
 rjsmin==1.0.12
