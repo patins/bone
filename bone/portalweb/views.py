@@ -39,7 +39,6 @@ TINDER_NOT_COMPLETED_SPECS = Q(tinder__bio="") | Q(tinder__age="") |\
                              Q(tinder__name="") | Q(tinder__picture="") |\
                              Q(tinder__location="")
 
-
 def tinders_metrics():
     residents_not_alumni = Resident.objects.filter(alumni=False)
     total = residents_not_alumni.count()

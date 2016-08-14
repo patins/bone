@@ -111,3 +111,7 @@ body {
 .admin-link {
   padding-right: 10px;
 }
+
+.alert {
+  overflow: auto;
+}
