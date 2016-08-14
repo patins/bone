@@ -50,4 +50,10 @@
   </div>
 </div>
 {% endfor %}
+{% if only_not_completed %}
+<h3>Email List</h3>
+<textarea style="width: 100%;">
+{% for resident in residents %}{{ resident.name }} <{{ resident.kerberos }}@mit.edu>{% if not forloop.last %}, {% endif %}{% endfor %}
+</textarea>
+{% endif %}
 {% endblock %}
