@@ -10,7 +10,9 @@
 		{% endif %}
 		{% compress css %}
 		<link rel=stylesheet type=text/css href="{% static 'css/bootstrap.css' %}"/>
+		{% endcompress %}
 		<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+		{% compress css}
 		<link rel=stylesheet type=text/css href="{% static 'css/style.css' %}"/>
 		<link rel=stylesheet type=text/css href="{% static 'css/tinder.css' %}"/>
 		{% endcompress %}
