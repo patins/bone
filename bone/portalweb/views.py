@@ -35,6 +35,17 @@ def quotes_new(request):
         return render(request, 'portalweb/quotes_new.html', {'form': form })
 
 @login_required
+def quotes_delete(request, quote_id):
+    current_resident = request.user.resident
+    quote = Quote.objects.get(id=quote_id)
+    if (request.method == 'POST' and quote and current_resident and
+       (quote.submitter == current_resident or quote.author == current_resident)):
+        quote.delete()
+        return redirect('quotes')
+    return redirect('/')
+
+
+@login_required
 def tinder(request):
     resident = request.user.resident
     try:

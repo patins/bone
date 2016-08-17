@@ -131,3 +131,13 @@ body {
 .quote-private * {
   color: rgba(255, 255, 255, 1);
 }
+.quote button {
+  position:absolute;
+  top:4px;
+  right:19px;
+  overflow:hidden;
+}
+
+.quote button * {
+  color:#FFF;
+}

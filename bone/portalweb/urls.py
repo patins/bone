@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^tinders/$', views.tinders, name='tinders'),
     url(r'^login/$', auth.login_view, name='login'),
     url(r'^logout/$', auth.logout_view, name='logout'),
-    url(r'^quotes/new/$', views.quotes_new, name='quotes_new')
+    url(r'^quotes/new/$', views.quotes_new, name='quotes_new'),
+    url(r'^quotes/(?P<quote_id>\d+)/delete/$', views.quotes_delete, name='quotes_delete')
 ]
