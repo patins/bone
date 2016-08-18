@@ -114,5 +114,5 @@ body {
 
 .alert {
   overflow: auto;
-  min-width: 450px;
+  min-width: 60%;
 }
