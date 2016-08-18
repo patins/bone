@@ -102,6 +102,8 @@ def tinders(request):
 @login_required
 @permission_required('tinders.view_all', raise_exception=True)
 def tinders_print(request):
+    only_completed = request.GET.get('only_completed') != None
     residents = Resident.objects.filter(tinder__isnull=False).order_by('alumni', 'year', 'name')
-    residents = residents.exclude(TINDER_NOT_COMPLETED_SPECS)
+    if only_completed:
+        residents = residents.exclude(TINDER_NOT_COMPLETED_SPECS)
     return render(request, 'portalweb/tinders_print.html', { 'residents': residents })
