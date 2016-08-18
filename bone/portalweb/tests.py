@@ -73,11 +73,11 @@ class TinderTestCase(TestCase):
         self.c.force_login(user)
     def test_make_tinder_notification(self):
         r = self.c.get('/profile/')
-        self.assertIn(b"Tinder Profiles are up!", r.content)
+        self.assertIn(b"Start your Tinder profile!", r.content)
         r = self.c.get('/tinder/')
         self.assertEqual(200, r.status_code)
         r = self.c.get('/profile/')
-        self.assertIn(b"We see you started your Tinder profile!", r.content)
+        self.assertIn(b"Your Tinder is not yet completed!", r.content)
     def test_tinder_preview(self):
         r = self.c.get('/tinder/')
         self.assertIn(b"Your Tinder", r.content)

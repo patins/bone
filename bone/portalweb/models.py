@@ -16,3 +16,6 @@ class Tinder(models.Model):
         permissions = (
             ("view_all", "Can view all Tinders and bulk output"),
         )
+
+    def completed(self):
+        return not (self.bio == "" or self.age == "" or self.name == "" or self.picture == "" or self.location == "")

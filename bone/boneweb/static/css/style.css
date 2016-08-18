@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Champagne';
-  src: url('../font/normal.ttf') format('truetype');
+  src: url('../fonts/normal.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Champagne';
   font-weight: bold;
-  src: url('../font/bold.ttf') format('truetype');
+  src: url('../fonts/bold.ttf') format('truetype');
 }
 /* stolen from bootstrap example */
 body {
@@ -112,7 +112,6 @@ body {
   padding-right: 10px;
 }
 
-
 .quote {
   word-break: break-word;
 }
@@ -137,7 +136,10 @@ body {
   right:19px;
   overflow:hidden;
 }
-
 .quote button * {
   color:#FFF;
+}
+
+.alert {
+  overflow: auto;
 }

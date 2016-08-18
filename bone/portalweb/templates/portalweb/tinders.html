@@ -1,11 +1,33 @@
 {% extends "boneweb/simple.html" %}
 {% block content %}
+<a href="{% url 'tinders_print' %}" class="btn btn-default pull-right" target="_blank">
+  <i class="fa fa-print" aria-hidden="true"></i>
+  Print Completed
+</a>
 <h1>
   B1 Current Resident Tinders
   <p>
     *This page lists all current residents as well as any alumni that have created a Tinder.
   </p>
 </h1>
+{% if metrics %}
+<h3>Current Resident Metrics</h3>
+<div class="progress">
+  <div class="progress-bar progress-bar-danger" style="width: {{ metrics.not_started_pct }}%">
+    {{ metrics.not_started }} not started
+  </div>
+  <div class="progress-bar progress-bar-warning" style="width: {{ metrics.started_pct }}%">
+    {{ metrics.started }} started
+  </div>
+  <div class="progress-bar progress-bar-success" style="width: {{ metrics.completed_pct }}%">
+    {{ metrics.completed }} completed
+  </div>
+</div>
+{% endif %}
+<ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
+  <li role="presentation"{% if not only_not_completed %} class="active"{% endif %}><a href=".">All</a></li>
+  <li role="presentation"{% if only_not_completed %} class="active"{% endif %}><a href="?not_completed">Current Residents Not Completed</a></li>
+</ul>
 {% for resident in residents %}
 <div class="row">
   <div class="col-md-6">
@@ -21,11 +43,17 @@
   </div>
   <div class="col-md-6">
     {% if resident.tinder %}
-    {% include "portalweb/tinder_phone.html" with tinder=resident.tinder%}
+    {% include "portalweb/tinder_phone.html" with tinder=resident.tinder %}
     {% else %}
     <h2 style="text-align: center;">Tinder Not Created</h2>
     {% endif %}
   </div>
 </div>
 {% endfor %}
+{% if only_not_completed %}
+<h3>Email List</h3>
+<textarea style="width: 100%;">
+{% for resident in residents %}{{ resident.name }} <{{ resident.kerberos }}@mit.edu>{% if not forloop.last %}, {% endif %}{% endfor %}
+</textarea>
+{% endif %}
 {% endblock %}

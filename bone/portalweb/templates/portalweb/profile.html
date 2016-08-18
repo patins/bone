@@ -14,14 +14,40 @@
   Year: {{ resident.year }}
 </p>
 {% if resident.tinder %}
-<div class="alert alert-info" style="display: inline-block;">
-  <h3 style="margin-top: 0;">We see you started your Tinder profile!</h3>
-  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">Update Yours</a>
+{% if resident.tinder.completed %}
+<div class="alert alert-success">
+  <h3 style="margin-top: 0;"><i class="fa fa-check" aria-hidden="true"></i> Your Tinder profile is complete!</h3>
+  <p>
+    Your profile will be printed out just like the Humans of Burton One posters.
+  </p>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+    Update It
+  </a>
 </div>
 {% else %}
-<div class="alert alert-danger" style="display: inline-block;">
-  <h3 style="margin-top: 0;">Tinder Profiles are up!</h3>
-  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">Create Yours</a>
+<div class="alert alert-warning">
+  <h3 style="margin-top: 0;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Your Tinder is not yet completed!</h3>
+  <p>
+    Your profile is missing some information. It's not ready to be printed until it's complete.
+  </p>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+    Update It
+  </a>
+</div>
+{% endif %}
+{% else %}
+<div class="alert alert-danger">
+  <h3 style="margin-top: 0;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Start your Tinder profile!</h3>
+  <p>
+    For floor rush this year, we're going with Tinder profiles.
+    Create yours on the site, and it will be printed out just like the Humans of Burton One posters.
+  </p>
+  <a class="btn btn-default" href="{% url 'tinder' %}" role="button">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Create Yours
+  </a>
 </div>
 {% endif %}
 <form role="form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
