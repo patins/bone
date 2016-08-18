@@ -1,9 +1,15 @@
 {% extends "boneweb/simple.html" %}
 {% block content %}
-<a href="{% url 'tinders_print' %}" class="btn btn-default pull-right" target="_blank">
-  <i class="fa fa-print" aria-hidden="true"></i>
-  Print Completed
-</a>
+<div class="pull-right">
+  <a href="{% url 'tinders_print' %}" class="btn btn-warning" target="_blank">
+    <i class="fa fa-print" aria-hidden="true"></i>
+    Print All (draft)
+  </a>
+  <a href="{% url 'tinders_print' %}?only_completed" class="btn btn-success" target="_blank">
+    <i class="fa fa-print" aria-hidden="true"></i>
+    Print Completed
+  </a>
+</div>
 <h1>
   B1 Current Resident Tinders
   <p>
