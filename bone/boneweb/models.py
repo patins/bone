@@ -30,6 +30,9 @@ class Resident(models.Model):
     def __str__(self):
         return "{0} ({1})".format(self.name, self.kerberos)
 
+    def first_name(self):
+        return self.name.split(" ")[0]
+
 @receiver(post_save, sender=Resident, dispatch_uid="invalidate_resident_cache")
 @receiver(post_delete, sender=Resident, dispatch_uid="invalidate_resident_cache")
 def invalidate_resident_cache(sender, instance, **kwargs):
