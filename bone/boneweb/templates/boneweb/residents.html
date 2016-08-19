@@ -13,20 +13,27 @@
   <li role="presentation" {% if request.resolver_match.url_name == 'alumni' %}class="active"{% endif %}><a href="{% url 'alumni' %}">Alumni</a></li>
   {% endif %}
 </ul>
-{% for resident in residents %}
 <div class="row resident">
-  <div class="col-md-4 resident-picture">
-    {% thumbnail resident.picture "x400" as im %}
-    <img src="{{ im.url }}" />
-    {% endthumbnail %}
+  {% for resident in residents %}
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="hovereffect">
+          <img class="img-responsive" src="{{ resident.picture.url }}" />
+          <div class="overlay">
+             <h2>{{ resident.name }}</h2>
+             <p class="info">{{ resident.bio }}</p> 
+          </div>
+      </div>
   </div>
-  <div class="col-md-8">
+
+
+<!--   <div class="col-md-8">
     <h2>{{ resident.name }} - {{ resident.kerberos }}{% if not year %} (<a href="{% url 'residents_by_year' resident.year %}">{{ resident.year }}</a>){% endif %}</h2>
     <p>
       {{ resident.bio | default:"No bio available." | linebreaks }}
     </p>
-  </div>
+  </div> -->
+  {% endfor %}
 </div>
-{% endfor %}
 {% endcache %}
 {% endblock %}
