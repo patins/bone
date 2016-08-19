@@ -17,7 +17,11 @@
   {% for resident in residents %}
   <div class="col col-md-4">
     <figure class="effect-lily">
-      <img src="{{ resident.picture.url }}" />
+      {% if resident.picture %}
+        <img src="{{ resident.picture.url }}" />
+      {% else %}
+        <img src="" />
+      {% endif %}
       <figcaption>
         <div>
           <h2>{{ resident.first_name }} <span>{{ resident.kerberos }}</span></h2>
