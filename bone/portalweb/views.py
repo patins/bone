@@ -57,7 +57,7 @@ def tinders_metrics():
     return metrics
 
 @login_required
-@permission_required('tinders.view_all', raise_exception=True)
+@permission_required('portalweb.view_all', raise_exception=True)
 def tinders(request):
     only_not_completed = request.GET.get('not_completed') != None
     residents = Resident.objects.order_by('alumni', 'year', 'name')
@@ -73,7 +73,7 @@ def tinders(request):
     })
 
 @login_required
-@permission_required('tinders.view_all', raise_exception=True)
+@permission_required('portalweb.view_all', raise_exception=True)
 def tinders_print(request):
     only_completed = request.GET.get('only_completed') != None
     residents = Resident.objects.filter(tinder__isnull=False).order_by('alumni', 'year', 'name')
