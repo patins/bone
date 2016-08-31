@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test import Client
-from .models import Resident, REXEvent
+from .models import Resident, REXEvent, Quote
 from datetime import datetime, timedelta
 from django.utils import timezone
 
@@ -106,3 +106,19 @@ class ResidentVisibilityTestCase(TestCase):
         self.assertIn(b'Abhi', r.content)
     def tearDown(self):
         Resident.objects.all().delete()
+
+class QuotesPublicTestCase(TestCase):
+    def setUp(self):
+        self.c = Client()
+        pat = Resident.objects.create(name='Patrick', kerberos='insinger', year=2019, visible=True)
+        abhi = Resident.objects.create(name='Abhi', kerberos='aveni', year=2019, visible=True)
+        Quote.objects.create(text="Funnels everyday", author=pat, submitter=abhi, public=True)
+        Quote.objects.create(text="Never forget the 3-week rule", author=abhi, submitter=abhi, public=False)
+    def test_quotes_public_viewability(self):
+        r = self.c.get('/quotes/')
+        self.assertEqual(200, r.status_code)
+        self.assertIn(b"Funnels everyday", r.content)
+        self.assertNotIn(b"Never forget the 3-week rule", r.content)
+    def tearDown(self):
+        Resident.objects.all().delete()
+        Quote.objects.all().delete()

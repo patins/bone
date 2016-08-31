@@ -112,6 +112,34 @@ body {
   padding-right: 10px;
 }
 
+.quote {
+  word-break: break-word;
+}
+.quote-public {
+  background-color: rgba(255, 255, 255, 1);
+  border-color: rgba(0, 153, 255, 0.8);
+}
+.quote-public * {
+  color: rgba(0, 153, 255, 1);
+}
+.quote-private {
+  background-color: rgba(0, 153, 255, .8);
+  border-color: rgba(0, 153, 255, 1);
+  word-break: break-word;
+}
+.quote-private * {
+  color: rgba(255, 255, 255, 1);
+}
+.quote button {
+  position:absolute;
+  top:4px;
+  right:19px;
+  overflow:hidden;
+}
+.quote button * {
+  color:#FFF;
+}
+
 .alert {
   overflow: auto;
   min-width: 60%;

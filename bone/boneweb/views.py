@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resident, REXEvent
+from .models import Resident, REXEvent, Quote
 
 from django.http import Http404
 
@@ -38,6 +38,12 @@ def alumni(request):
     visible_alums = Resident.objects.filter(visible=True, alumni=True)
     ordered_alums = visible_alums.order_by('year', 'name')
     return render(request, 'boneweb/residents.html', {'residents': ordered_alums, 'alumni': ordered_alums, 'all_years': all_years})
+
+def quotes(request):
+    viewable_quotes = Quote.objects.filter(visible=True).order_by('-submitted_at') # last submitted at top
+    if not request.user.is_authenticated():
+        viewable_quotes = viewable_quotes.filter(public=True)
+    return render(request, 'boneweb/quotes.html', {'quotes': viewable_quotes})
 
 """
 from django.conf import settings

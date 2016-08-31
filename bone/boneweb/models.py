@@ -12,6 +12,8 @@ from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from django.utils.text import Truncator
+
 def _picture_upload_to(resident, filename):
     return "residents/{}.{}".format(uuid4().hex, filename.split('.')[-1])
 
@@ -56,3 +58,21 @@ class REXEvent(models.Model):
 @receiver(post_delete, sender=REXEvent, dispatch_uid="invalidate_rex_event_cache")
 def invalidate_rex_event_cache(sender, instance, **kwargs):
     cache.delete(make_template_fragment_key('rex_events'))
+
+class Quote(models.Model):
+    text = models.TextField()
+    author = models.ForeignKey(Resident, related_name='authored_quotes', on_delete=models.CASCADE)
+    submitter = models.ForeignKey(Resident, related_name='submitted_quotes', on_delete=models.CASCADE)
+    public = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        if self.text and self.text[0] == "\"" and self.text[-1] == "\"":
+            raise ValidationError('I said no quotation marks boiiiii')
+
+    def short_quote(self):
+        return Truncator(self.text).chars(75)
+
+    def __str__(self):
+        return "\"{0}\" - {1}".format(self.short_quote(), self.author.name)
