@@ -59,39 +59,3 @@ class ProfileTestCase(TestCase):
         Resident.objects.all().delete()
         User.objects.all().delete()
 
-class TinderTestCase(TestCase):
-    def setUp(self):
-        user = User.objects.create(username='insinger')
-        self.resident = Resident.objects.create(
-            name='Patrick',
-            kerberos='insinger',
-            year=2019,
-            user=user
-        )
-        self.c = Client()
-        self.c.force_login(user)
-    def test_make_tinder_notification(self):
-        r = self.c.get('/profile/')
-        self.assertIn(b"Start your Tinder profile!", r.content)
-        r = self.c.get('/tinder/')
-        self.assertEqual(200, r.status_code)
-        r = self.c.get('/profile/')
-        self.assertIn(b"Your Tinder is not yet completed!", r.content)
-    def test_tinder_preview(self):
-        r = self.c.get('/tinder/')
-        self.assertIn(b"Your Tinder", r.content)
-    def test_update_tinder_info(self):
-        r = self.c.post('/tinder/', {'name': "newname", 'age': "newage", 'bio': "newbio", 'location': "newlocation"})
-        self.assertEqual(200, r.status_code)
-        self.assertIn(b"newname", r.content)
-        self.assertIn(b"newage", r.content)
-        self.assertIn(b"newbio", r.content)
-        self.assertIn(b"newlocation", r.content)
-        self.resident.refresh_from_db()
-        self.assertEqual(self.resident.tinder.name, "newname")
-        self.assertEqual(self.resident.tinder.age, "newage")
-        self.assertEqual(self.resident.tinder.bio, "newbio")
-        self.assertEqual(self.resident.tinder.location, "newlocation")
-    def tearDown(self):
-        Resident.objects.all().delete()
-        User.objects.all().delete()
