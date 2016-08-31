@@ -382,6 +382,7 @@
     "@hr-border": "@gray-lighter"
   },
   "css": [
+    "print.less",
     "type.less",
     "code.less",
     "grid.less",
@@ -430,5 +431,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "https://getbootstrap.com/customize/?id=8278ac0b910d1c2a3b2999e5e2cda5a5"
+  "customizerUrl": "https://getbootstrap.com/customize/?id=e0b0852374a325ee93270ca30b590ee7"
 }

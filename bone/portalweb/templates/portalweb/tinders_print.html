@@ -1,9 +1,0 @@
-{% extends "boneweb/layout.html" %}
-{% block body %}
-{% for resident in residents %}
-{% include "portalweb/tinder_phone.html" with tinder=resident.tinder %}
-{% endfor %}
-<script type="text/javascript">
-window.print();
-</script>
-{% endblock %}
