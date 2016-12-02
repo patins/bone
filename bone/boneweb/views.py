@@ -26,7 +26,7 @@ def residents(request):
 
 def residents_by_year(request, year):
     all_years = Resident.objects.filter(visible=True, alumni=False).values_list('year', flat=True).distinct().order_by('year')
-    visible_residents = Resident.objects.filter(visible=True, year=year).order_by('name')
+    visible_residents = Resident.objects.filter(visible=True, year=year, alumni=False).order_by('name')
     if visible_residents.count() == 0:
         raise Http404()
     visible_alums = Resident.objects.filter(visible=True, alumni=True)

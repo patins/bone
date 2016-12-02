@@ -79,7 +79,7 @@ class ResidentsPageTestCase(TestCase):
         self.assertNotIn(b'Patrick', r.content)
         self.assertNotIn(b'Abhi', r.content)
         self.assertNotIn(b'Shader', r.content)
-        self.assertIn(b'Anubhav', r.content)
+        self.assertNotIn(b'Anubhav', r.content)
     def test_alumni_page(self):
         r = self.c.get('/residents/alumni/')
         self.assertEqual(200, r.status_code)
