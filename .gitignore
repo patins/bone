@@ -16,3 +16,5 @@ local_settings.py
 /bone/db.sqlite3
 
 app.env
+
+.DS_Store
