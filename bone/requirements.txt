@@ -5,7 +5,7 @@ django-compressor==2.0
 django-debug-toolbar==1.5
 django-redis==4.4.4
 fakeredis==0.7.0
-Pillow==3.3.2
+Pillow==9.0.1
 psycopg2==2.8.3
 pytz==2016.6.1
 rcssmin==1.0.6
